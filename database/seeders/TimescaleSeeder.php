@@ -23,7 +23,7 @@ abstract class TimescaleSeeder extends Seeder
 
     public function run()
     {
-        app('db')->connection('timescale')->disableQueryLog();
+        app('db')->disableQueryLog();
 
         $this->createTemporaryDirectory()
             ->createFile()
@@ -72,7 +72,7 @@ abstract class TimescaleSeeder extends Seeder
 
     protected function dropSecondaryIndexes(): self
     {
-        Schema::connection('timescale')->table('activity', function(Blueprint $table) {
+        Schema::table('activity', function(Blueprint $table) {
             $this->dropTableIndexes($table);
         });
 
@@ -83,7 +83,7 @@ abstract class TimescaleSeeder extends Seeder
     {
         $this->command->getOutput()->info('Adding secondary indexes...');
 
-        Schema::connection('timescale')->table('activity', function(Blueprint $table) {
+        Schema::table('activity', function(Blueprint $table) {
             $this->addTableIndexes($table);
         });
 
@@ -96,7 +96,7 @@ abstract class TimescaleSeeder extends Seeder
 
         $this->command->getOutput()->progressStart($this->rowsToInsert/$this->uniqueRows);
 
-        app('db')->connection('timescale')->table($this->getTable())->truncate();
+        app('db')->table($this->getTable())->truncate();
 
         for ($i = 0; $i < $this->rowsToInsert/$this->uniqueRows; $i++) {
             $this->loadFileIntoDatabase();
@@ -115,8 +115,8 @@ abstract class TimescaleSeeder extends Seeder
             '--skip-header',
             '--skip-header',
             '--columns "'.join(',', array_keys($this->buildRow())).'"',
-            '--connection "host=localhost user='.config('database.connections.timescale.username').' sslmode=disable password='.config('database.connections.timescale.password').'"',
-            '--db-name '.config('database.connections.timescale.database'),
+            '--connection "host=localhost user='.config('database.connections.pgsql.username').' sslmode=disable password='.config('database.connections.pgsql.password').'"',
+            '--db-name '.config('database.connections.pgsql.database'),
             '--table '.$this->getTable(),
             '--file '.$this->file,
             '--workers '.$this->workers,
@@ -149,7 +149,7 @@ abstract class TimescaleSeeder extends Seeder
     protected function analyzeTable(): self
     {
         return tap($this, function () {
-            app('db')->connection('timescale')->statement('ANALYZE '.$this->getTable());
+            app('db')->statement('ANALYZE '.$this->getTable());
         });
     }
 
