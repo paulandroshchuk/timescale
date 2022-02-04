@@ -72,7 +72,7 @@ abstract class TimescaleSeeder extends Seeder
 
     protected function dropSecondaryIndexes(): self
     {
-        Schema::table('activity', function(Blueprint $table) {
+        Schema::table($this->getTable(), function(Blueprint $table) {
             $this->dropTableIndexes($table);
         });
 
@@ -83,7 +83,7 @@ abstract class TimescaleSeeder extends Seeder
     {
         $this->command->getOutput()->info('Adding secondary indexes...');
 
-        Schema::table('activity', function(Blueprint $table) {
+        Schema::table($this->getTable(), function(Blueprint $table) {
             $this->addTableIndexes($table);
         });
 
