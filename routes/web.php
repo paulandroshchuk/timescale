@@ -32,6 +32,12 @@ Route::get('/siege/activity-1', function () {
         ->count();
 });
 
+Route::get('/siege/activity-2', function () {
+    return \App\Models\Activity::query()
+        ->whereRaw("created_at > now() - INTERVAL '2 weeks'")
+        ->count();
+});
+
 Route::post('/siege/activity-1', function () {
     return \App\Models\Activity::create([
         'account_id' => rand(1, 5_000),
