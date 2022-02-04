@@ -21,30 +21,30 @@ class ActivitySeeder extends TimescaleSeeder
 
     protected function dropTableIndexes(Blueprint $table): void
     {
-        $table->dropIndex([
-            'account_id',
-            'activity_type',
-            'created_at',
-        ]);
-
-        $table->dropIndex([
-            'subscriber_id',
-            'created_at',
-        ]);
+//        $table->dropIndex([
+//            'account_id',
+//            'activity_type',
+//            'created_at',
+//        ]);
+//
+//        $table->dropIndex([
+//            'subscriber_id',
+//            'created_at',
+//        ]);
     }
 
     protected function addTableIndexes(Blueprint $table): void
     {
-        $table->index([
-            'account_id',
-            'activity_type',
-            'created_at',
-        ]);
-
-        $table->index([
-            'subscriber_id',
-            'created_at',
-        ]);
+//        $table->index([
+//            'account_id',
+//            'activity_type',
+//            'created_at',
+//        ]);
+//
+//        $table->index([
+//            'subscriber_id',
+//            'created_at',
+//        ]);
     }
 
     protected function buildRow(): array

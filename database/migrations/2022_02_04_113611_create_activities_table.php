@@ -14,17 +14,6 @@ class CreateActivitiesTable extends Migration
             $table->enum('activity_type', ['ACTIVITY_OPT_IN', 'ACTIVITY_OPT_OUT', 'TEXT']);
             $table->json('activity_data')->nullable();
             $table->dateTime('created_at', 4);
-
-            $table->index([
-                'account_id',
-                'activity_type',
-                'created_at',
-            ]);
-
-            $table->index([
-                'subscriber_id',
-                'created_at',
-            ]);
         });
     }
 
