@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class ActivitySeeder extends TimescaleSeeder
 {
-    protected int $rowsToInsert = 50_000_000;
+    protected int $rowsToInsert = 500_000_000;
 
     protected int $uniqueRows = 500_000;
 
