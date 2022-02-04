@@ -36,7 +36,7 @@ Route::get('/siege/activity-1', function () {
         ]);
 });
 
-Route::get('/siege/activity-1', function () {
+Route::get('/siege/activity-2', function () {
     return \App\Models\Activity::query()
         ->whereBetween('created_at', [
             now()->subWeeks(2),
@@ -44,7 +44,7 @@ Route::get('/siege/activity-1', function () {
         ]);
 });
 
-Route::get('/siege/activity-1', function () {
+Route::get('/siege/activity-3', function () {
     return \App\Models\Activity::query()
         ->whereBetween('created_at', [
             now()->subWeeks(2),
