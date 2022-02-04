@@ -30,5 +30,5 @@ Artisan::command('rush-b {--count=10000}', function () {
         ]);
     }
 
-    $this->info('Diff: '.now()->diffInSeconds($startAt));
+    $this->info('Diff: '.now()->diffInMilliseconds($startAt));
 });
