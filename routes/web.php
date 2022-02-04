@@ -21,35 +21,15 @@ Route::get('/siege/activity-0', function () {
     return \App\Models\Activity::query()
         ->where('account_id', 1)
         ->where('activity_type', ['ACTIVITY_OPT_IN', 'ACTIVITY_OPT_OUT', 'TEXT'][rand(0, 2)])
-        ->whereBetween('created_at', [
-            now()->subWeeks(2),
-            now()->subWeek(),
-        ]);
+        ->whereRaw("created_at > now() - INTERVAL '2 weeks'")
+        ->count();
 });
 
 Route::get('/siege/activity-1', function () {
     return \App\Models\Activity::query()
         ->where('account_id', 1)
-        ->whereBetween('created_at', [
-            now()->subWeeks(2),
-            now()->subWeek(),
-        ]);
-});
-
-Route::get('/siege/activity-2', function () {
-    return \App\Models\Activity::query()
-        ->whereBetween('created_at', [
-            now()->subWeeks(2),
-            now()->subWeek(),
-        ]);
-});
-
-Route::get('/siege/activity-3', function () {
-    return \App\Models\Activity::query()
-        ->whereBetween('created_at', [
-            now()->subWeeks(2),
-            now()->subWeek(),
-        ]);
+        ->whereRaw("created_at > now() - INTERVAL '2 weeks'")
+        ->count();
 });
 
 Route::post('/siege/activity-1', function () {
