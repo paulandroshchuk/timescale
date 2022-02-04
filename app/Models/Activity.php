@@ -8,6 +8,8 @@ class Activity extends Model
 {
     protected $dateFormat = 'Y-m-d H:i:s.u';
 
+    public $incrementing = false;
+
     protected static $unguarded = true;
 
     const UPDATED_AT = null;
