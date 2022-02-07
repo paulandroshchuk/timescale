@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/siege/empty', function () {
+    return \App\Models\EmptyHipertable::query()
+        ->whereRaw("created_at > now() - INTERVAL '2 weeks'")
+        ->count();
+});
+
 Route::get('/siege/activity-0', function () {
     return \App\Models\Activity::query()
         ->where('account_id', 1)
